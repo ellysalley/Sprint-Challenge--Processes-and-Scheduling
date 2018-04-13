@@ -4,14 +4,21 @@
 
 Add your answers inline, below, with your pull request.
 
-1. List all of the main states a process may be in at any point in time on a
-   standard Unix system. Briefly explain what each of these states mean.
+1. List all of the main states a process may be in at any point in time on a standard Unix system. Briefly explain what each of these states mean.
+- New: In the new or created state, the process awaits admission to the ready state. 
+- Running: In the running state, a process is running on a processor. Executing instructions. 
+- Ready: In the ready state, a process is ready to run but for some reason the OS has chosen not to run it at this given moment.
+- Blocked: In the blocked state, a process has performed some kind of operation that makes it not ready to run until some other event takes place. A common example: when a process initiates an I/O request to a disk, it becomes blocked and thus some other process can use the processor. 
+- Terminated: In the terminated state, process complete its execution (but still remain in the process table) or being killed explicitly. 
 
 2. What is a Zombie Process? How does it get created? How does it get destroyed?
+- A process could be placed in a final state where it hase exited but has not yet been cleaned up until its parent process calls the wait system call to read its exit status, at which point the process is removed from the process table. If the parent fails to call wait, this continues to consume the PID so it causes a memory leak. 
 
 3. Describe the job of the Scheduler in the OS in general.
+- Scheduler sets priorities and makes a decision wheter to continue running the currently-running process, or switch to a different one based on scheduling policies or algorithm. 
 
 4. Describe the benefits of the MLFQ over a plain Round-Robin scheduler.
+- Round Robin algorithm reduce response time but are terrible for turnaround time. In contrast, the MLFQ would like to make a system feel responsive to interactive users (i.e., users sitting and staring at the screen, waiting for a process to finish), and thus minimize response time. The MLFQ varies the priority of each process based upon its observed behavior(or history), so it can make better scheduling decisions (in the future). 
 
 ## Programming Exercise: The Lambda School Shell (`lssh`)
 
